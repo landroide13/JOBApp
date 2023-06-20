@@ -1,13 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, FlatList, ActivityIndicator } from 'react-native'
+import { useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
 import JobCard from '../components/JobCard'
+import JobNearCard from '../components/JobNearCard'
+import useFetch from '../hook/useFetch'
+
 
 const HomeScreen = () => {
 
     const navigation = useNavigation()
+
+    const { data, isLoading, error } = useFetch()
+
+    const [selectedJob, setSelectedJob] = useState();
 
     const handleSignout = () =>{
         auth
@@ -55,17 +62,43 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             </View>
             <Text style={styles.title}>Popular Jobs</Text>
+
             <View style={styles.popularContainer}>
-                <JobCard />
-                <JobCard />
-                <JobCard />
+            {
+                isLoading ? ( <ActivityIndicator size="large" /> ):
+                error ? (<Text>Something went wrong</Text>) :
+                (
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <JobCard item={item} selectedJob={selectedJob}  />
+                        )}
+                        keyExtractor={(item) => item._id }
+                        
+                        horizontal
+                    />
+                )
+                
+            } 
             </View>
 
             <Text style={styles.title}>Near by Jobs</Text>
             <View style={styles.nearByContainer}>
-                <JobCard />
-                <JobCard />
-                <JobCard />
+            {
+                isLoading ? ( <ActivityIndicator size="large" /> ):
+                error ? (<Text>Something went wrong</Text>) :
+                (
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => (
+                            <JobNearCard item={item} selectedJob={selectedJob}  />
+                        )}
+                        keyExtractor={(item) => item._id }
+                        
+                    />
+                )
+                
+            } 
             </View>
             
             {/* <TouchableOpacity style={styles.button} onPress={handleSignout}>
@@ -83,7 +116,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: 8
     },
     header:{
         flexDirection: 'row',
@@ -105,7 +139,8 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:25,
-        alignSelf:'flex-start'
+        alignSelf:'flex-start',
+        marginTop: 6
     },
     inputContainer:{
         flexDirection: 'row',
@@ -150,4 +185,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+
+    popularContainer:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'flex-start'
+    },
+
+    nearByContainer:{
+        flexDirection: 'column',
+        alignItems:'center',
+        justifyContent: 'flex-start'
+    }
 })

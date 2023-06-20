@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import { useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native'
 import JobCard from '../components/JobCard'
 import JobNearCard from '../components/JobNearCard'
 import useFetch from '../hook/useFetch'
-
 
 const HomeScreen = () => {
 
@@ -16,13 +15,19 @@ const HomeScreen = () => {
 
     const [selectedJob, setSelectedJob] = useState();
 
-    const handleSignout = () =>{
-        auth
-        .signOut()
-        .then(() =>{
-            navigation.replace("Login")
-        })
-    }
+    const handleCardPress = (item) => {
+        console.log(item)
+        navigation.push('JobDetail', {item});
+        setSelectedJob(item._id);
+      };
+
+    // const handleSignout = () =>{
+    //     auth
+    //     .signOut()
+    //     .then(() =>{
+    //         navigation.replace("Login")
+    //     })
+    // }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +35,7 @@ const HomeScreen = () => {
             <View style={styles.header}>
                 <Image style={styles.userImg} source={require('../assets/profile.jpg')} />
                 <Text style={styles.user}>Hello: { auth.currentUser?.email }</Text>
-                <TouchableOpacity style={styles.buttonHeader} onPress={() =>{}}>
+                <TouchableOpacity style={styles.buttonHeader} onPress={()=> navigation.navigate('History')}>
                     <Image style={styles.userImgSearch} source={require('../assets/share.png')} />
                 </TouchableOpacity>
             </View>
@@ -71,7 +76,7 @@ const HomeScreen = () => {
                     <FlatList
                         data={data}
                         renderItem={({ item }) => (
-                            <JobCard item={item} selectedJob={selectedJob}  />
+                            <JobCard item={item} selectedJob={selectedJob} handleCardPress={handleCardPress}  />
                         )}
                         keyExtractor={(item) => item._id }
                         
@@ -117,7 +122,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: 'white',
-        padding: 8
+        padding: 8,
+        marginTop: StatusBar.currentHeight || 0,
     },
     header:{
         flexDirection: 'row',

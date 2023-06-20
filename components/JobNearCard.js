@@ -19,7 +19,7 @@ export default JobNearCard
 
 const styles = StyleSheet.create({
     container:{
-        width: '80%',
+        width: '99%',
         padding: 7,
         flexDirection: 'row',
         alignSelf:'center',
@@ -30,9 +30,11 @@ const styles = StyleSheet.create({
       },
 
       textContainer:{
+        marginVertical: 7,
+        marginHorizontal: 10,
         flexDirection:'column',
         justifyContent:'center',
-        alignItems: 'center'
+        alignItems: 'flex-start'
       },
       
       employer:{

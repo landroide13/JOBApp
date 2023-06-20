@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
-const JobCard = ({ item }) => {
+const JobCard = ({ item, handleCardPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Image source={{ uri: item.employer_logo }} style={styles.logoImage} />
+      <TouchableOpacity onPress={() =>handleCardPress(item)}>
+        <Image source={{ uri: item.employer_logo }} resizeMode='contain' style={styles.logoImage} />
       </TouchableOpacity>
       <View style={styles.textContainer}>
         <Text style={styles.employer}>{ item.employer_name }</Text>

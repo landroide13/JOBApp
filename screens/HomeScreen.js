@@ -15,9 +15,9 @@ const HomeScreen = () => {
 
     const [selectedJob, setSelectedJob] = useState();
 
-    const handleCardPress = (item) => {
+    const handleCardPress = item => {
         console.log(item)
-        navigation.push('JobDetail', {item});
+        navigation.navigate('JobDetail', { item });
         setSelectedJob(item._id);
       };
 
@@ -75,11 +75,10 @@ const HomeScreen = () => {
                 (
                     <FlatList
                         data={data}
-                        renderItem={({ item }) => (
-                            <JobCard item={item} selectedJob={selectedJob} handleCardPress={handleCardPress}  />
+                        renderItem={({ item } ) => (
+                            <JobCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress}  />
                         )}
                         keyExtractor={(item) => item._id }
-                        
                         horizontal
                     />
                 )
@@ -96,7 +95,7 @@ const HomeScreen = () => {
                     <FlatList
                         data={data}
                         renderItem={({ item }) => (
-                            <JobNearCard item={item} selectedJob={selectedJob}  />
+                            <JobNearCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress}  />
                         )}
                         keyExtractor={(item) => item._id }
                         
@@ -105,10 +104,6 @@ const HomeScreen = () => {
                 
             } 
             </View>
-            
-            {/* <TouchableOpacity style={styles.button} onPress={handleSignout}>
-                <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity> */}
         </View>
     </SafeAreaView>
   )

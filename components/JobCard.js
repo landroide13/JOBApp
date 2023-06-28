@@ -4,7 +4,7 @@ import React from 'react'
 const JobCard = ({ item, handleCardPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() =>handleCardPress(item)}>
+      <TouchableOpacity onPress={() => handleCardPress(item)}>
         <Image source={{ uri: item.employer_logo }} resizeMode='contain' style={styles.logoImage} />
       </TouchableOpacity>
       <View style={styles.textContainer}>
@@ -12,7 +12,7 @@ const JobCard = ({ item, handleCardPress }) => {
         <Text>{ item.job_title }</Text>
         <Text>{ item.job_country }</Text>
       </View>
-    </View>
+    </View>   
   )
 }
 

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
+import BtnTab from './BtnTab';
 
 function TabButton({ name, activeTab, onHandleSearchType }) {
     return (
       <TouchableOpacity
-        
         onPress={onHandleSearchType}>
         <Text>{name}</Text>
       </TouchableOpacity>
@@ -19,7 +19,7 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TabButton
+          <BtnTab
             name={item}
             activeTab={activeTab}
             onHandleSearchType={() => setActiveTab(item)}

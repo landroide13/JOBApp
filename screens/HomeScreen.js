@@ -1,4 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, TextInput, FlatList, ActivityIndicator, StatusBar } from 'react-native'
+import { StyleSheet, Text, 
+    TouchableOpacity, View, 
+    Image, TextInput, FlatList, 
+    ActivityIndicator, StatusBar, ScrollView } from 'react-native'
 import { useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
@@ -15,10 +18,10 @@ const HomeScreen = () => {
 
     const [selectedJob, setSelectedJob] = useState();
 
-    const handleCardPress = item => {
-        console.log(item)
-        navigation.navigate('JobDetail', { item });
-        setSelectedJob(item._id);
+    const handleCardPress = items => {
+        console.log(items)
+        navigation.navigate('JobDetail', { items });
+        setSelectedJob(items._id);
       };
 
     // const handleSignout = () =>{
@@ -31,6 +34,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+        
         <View>
             <View style={styles.header}>
                 <Image style={styles.userImg} source={require('../assets/profile.jpg')} />
@@ -40,7 +44,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             </View>
 
-            <Text style={styles.title}>Find your perfect Job</Text>
+            <Text style={styles.title}>Find your Perfect Job</Text>
 
             <View style={styles.inputContainer}>
                 <TextInput 
@@ -71,7 +75,7 @@ const HomeScreen = () => {
             <View style={styles.popularContainer}>
             {
                 isLoading ? ( <ActivityIndicator size="large" /> ):
-                error ? (<Text>Something went wrong</Text>) :
+                error ? (<Text>Something went Wrong</Text>) :
                 (
                     <FlatList
                         data={data}
@@ -82,29 +86,30 @@ const HomeScreen = () => {
                         horizontal
                     />
                 )
-                
             } 
             </View>
 
-            <Text style={styles.title}>Near by Jobs</Text>
-            <View style={styles.nearByContainer}>
-            {
-                isLoading ? ( <ActivityIndicator size="large" /> ):
-                error ? (<Text>Something went wrong</Text>) :
-                (
-                    <FlatList
-                        data={data}
-                        renderItem={({ item }) => (
-                            <JobNearCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress}  />
-                        )}
-                        keyExtractor={(item) => item._id }
-                        
-                    />
-                )
+            
+                <Text style={styles.title}>Near by Jobs</Text>
+            
+                <View style={styles.nearByContainer}>
+                {
+                    isLoading ? ( <ActivityIndicator size="large" /> ):
+                    error ? (<Text>Something went wrong</Text>) :
+                    (
+                        <FlatList
+                            data={data}
+                            renderItem={({ item }) => (
+                                <JobNearCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress}  />
+                            )}
+                            keyExtractor={(item) => item._id }
+                        />
+                    )
+                } 
+                </View>
                 
-            } 
-            </View>
         </View>
+        
     </SafeAreaView>
   )
 }
@@ -194,8 +199,7 @@ const styles = StyleSheet.create({
     },
 
     nearByContainer:{
+        flex: 1,
         flexDirection: 'column',
-        alignItems:'center',
-        justifyContent: 'flex-start'
     }
 })

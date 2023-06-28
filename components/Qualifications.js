@@ -20,4 +20,38 @@ const Qualifications = ({ title, points }) => {
 
 export default Qualifications
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+    backgroundColor: "#FFF",
+    borderRadius: 12,
+    padding: 10,
+  },
+  title: {
+    fontSize: 24,
+    color: 'grey',
+    fontFamily: 'Roboto',
+  },
+  pointsContainer: {
+    marginVertical: 8,
+  },
+  pointWrapper: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    marginVertical: 5,
+  },
+  pointDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 6,
+    backgroundColor: 'grey',
+    marginTop: 6,
+  },
+  pointText: {
+    fontSize: 18,
+    color: 'grey',
+    fontFamily: 'Roboto',
+    marginLeft: 5,
+  },
+})

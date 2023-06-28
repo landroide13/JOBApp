@@ -1,15 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import React from 'react'
 import BtnTab from './BtnTab';
-
-function TabButton({ name, activeTab, onHandleSearchType }) {
-    return (
-      <TouchableOpacity
-        onPress={onHandleSearchType}>
-        <Text>{name}</Text>
-      </TouchableOpacity>
-    );
-  }
 
 const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
@@ -34,4 +25,11 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
 
 export default Tabs
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+    marginBottom: 8,
+    alignItems: 'center'
+  },
+ 
+})

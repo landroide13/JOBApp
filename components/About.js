@@ -15,4 +15,25 @@ const About = ({ info }) => {
 
 export default About
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    backgroundColor: "#FFF",
+    borderRadius: 16,
+    padding: 10,
+  },
+  headText: {
+    fontSize: 22,
+    color: 'grey',
+    fontFamily: 'Roboto',
+  },
+  contentBox: {
+    marginVertical: 4,
+  },
+  contextText: {
+    fontSize: 18,
+    color: 'grey',
+    fontFamily: 'Roboto',
+    marginVertical: 15,
+  },
+})

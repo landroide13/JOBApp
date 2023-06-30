@@ -1,7 +1,7 @@
 import { StyleSheet, Text, 
-    TouchableOpacity, View, 
-    Image, TextInput, FlatList, 
-    ActivityIndicator, StatusBar, ScrollView } from 'react-native'
+        TouchableOpacity, View, 
+        Image, TextInput, FlatList, 
+        ActivityIndicator, StatusBar } from 'react-native'
 import { useState } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
@@ -11,6 +11,8 @@ import JobNearCard from '../components/JobNearCard'
 import useFetch from '../hook/useFetch'
 
 const HomeScreen = () => {
+
+    const [searchTerm, setSearchTerm] = useState("");
 
     const navigation = useNavigation()
 
@@ -23,6 +25,10 @@ const HomeScreen = () => {
         navigation.navigate('JobDetail', { items });
         setSelectedJob(items._id);
       };
+
+    const handleClick= () => {
+        navigation.navigate('JobSearchScreen');
+    }  
 
     // const handleSignout = () =>{
     //     auth
@@ -49,10 +55,11 @@ const HomeScreen = () => {
             <View style={styles.inputContainer}>
                 <TextInput 
                     placeholder='Find a Job'
-                    onChangeText={() =>{}}
+                    onChangeText={(text) => setSearchTerm(text)}
+                    // value={searchTerm}
                     style={styles.inputSearch}
                 />
-                <TouchableOpacity style={styles.buttonSearch} onPress={() =>{}}>
+                <TouchableOpacity style={styles.buttonSearch} onPress={() => navigation.navigate('JobsScreens')}>
                     <Image style={styles.userImgSearch} source={require('../assets/search.png')} />
                 </TouchableOpacity>
             </View>
@@ -107,7 +114,6 @@ const HomeScreen = () => {
                     )
                 } 
                 </View>
-                
         </View>
         
     </SafeAreaView>

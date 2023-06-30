@@ -1,4 +1,6 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, 
+        Text, TextInput, TouchableOpacity, 
+        View, SafeAreaView, Alert } from 'react-native'
 import { useEffect, useState} from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
@@ -19,24 +21,21 @@ const LoginScreen = () => {
         return unSubscribe
     }, [])
 
-    const handleSignUp = () =>{
-        auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log("Register With: ",user.email)
-        })
-        .catch(err => console.log(err.message))
-    }
-
-    const handleLogin = () =>{
+    const handleLogin = () =>{     
         auth
             .signInWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
+                Alert.alert('Welcome', user.email, [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')}
+                ])
                 console.log("Login With: ", user.email)
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                Alert.alert('Upps something went wrong', err.message, [
+                    {text: 'Try Again', onPress: () => console.log('OK Pressed')}
+                ])
+            })
     }      
 
     return (
@@ -63,8 +62,11 @@ const LoginScreen = () => {
                         <TouchableOpacity onPress={handleLogin} style={styles.button}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutLine]}>
-                            <Text style={styles.buttonOutlineText}>Register</Text>
+                        <TouchableOpacity onPress={() => navigation.replace('Register')}>
+                            <Text style={styles.buttonOutlineText}>
+                                Don't have and Account?
+                                <Text style={styles.registerText}>Register</Text>
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -138,5 +140,9 @@ const styles = StyleSheet.create({
         color: '#0782f9',
         fontWeight: 700,
         fontSize: 16
+    },
+
+    registerText:{
+        fontWeight: '900'
     }
 })

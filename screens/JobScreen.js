@@ -8,6 +8,7 @@ import About from '../components/About'
 import Qualifications from '../components/Qualifications'
 import Responsabilities from '../components/Responsabilities'
 import Company from '../components/Company'
+import Footer from '../components/Footer'
 
 const JobScreen = ({ route }) => {
 
@@ -57,32 +58,34 @@ const JobScreen = ({ route }) => {
 
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
-      }>
+    <>
+      <ScrollView showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
+        }>
 
-      <Company
-        companyLogo={items.employer_logo}
-        jobTitle={items.job_title}
-        companyName={items.employer_name}
-        location={items.job_country}
-      />
+        <Company
+          companyLogo={items.employer_logo}
+          jobTitle={items.job_title}
+          companyName={items.employer_name}
+          location={items.job_country}
+        />
 
-      <Tabs
-        tabs={tabs}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+        <Tabs
+          tabs={tabs}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
 
-      { displayTabContent() }
+        { displayTabContent() }
 
-    </ScrollView>
+      </ScrollView>
+
+      <Footer  url={items?.job_apply_link ?? 'https://careers.google.com/jobs/results/'} />
+    </>
   )
 }
 
 export default JobScreen
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({})

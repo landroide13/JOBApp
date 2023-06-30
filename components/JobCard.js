@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 55,
     height: 55,
+    borderRadius:15
   },
 })

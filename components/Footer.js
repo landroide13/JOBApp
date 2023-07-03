@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Linking, Alert } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Linking, Alert, Platform } from 'react-native'
 import { useState } from 'react'
 
 import { useNavigation } from '@react-navigation/native'
@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
       applyBtnText: {
         fontSize: 20,
         color: 'white',
-        fontFamily: 'Roboto',
+        fontFamily: Platform.OS === 'android' ? 'Roboto' : null,
       },
 })

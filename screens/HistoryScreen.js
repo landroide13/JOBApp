@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Alert } from 'react-native'
 import { useState, useEffect } from 'react'
 
 import { DatabaseConnection } from '../connection/connection'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { useNavigation } from '@react-navigation/native'
+
 const db = DatabaseConnection.getConnection()
 
 const HistoryScreen = () => {
+
+  const navigation = useNavigation()
 
   const [listItem, setListItem] = useState([])
 
@@ -26,6 +30,22 @@ const HistoryScreen = () => {
       })
   }, [])
 
+  const deleteJob = (job_id)=>{
+    db.transaction(function(tx){
+        tx.executeSql(
+            'DELETE FROM Jobs where job_id=?',
+            [job_id],
+            (tx, results)=>{
+                Alert.alert('Job Deleted Successfully..', null, [
+                  {text: 'OK', onPress: () => console.log('Delete Pressed')}
+              ])
+                navigation.navigate('Home')
+            }
+            
+        )
+    })
+}
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,13 +62,13 @@ const HistoryScreen = () => {
               <Text style={styles.title}>{item.job_title}</Text>
               <Text style={styles.employer}>{item.employer_name}</Text>
             </View>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={() => deleteJob(item.job_id)}>
               <Text style={styles.deleteBtn}>Delete</Text>
             </TouchableOpacity>
           </View>
 
         )}
-        keyExtractor={item => item._id }                
+        keyExtractor={item => item.job_id }                
       />    
 
     </SafeAreaView>

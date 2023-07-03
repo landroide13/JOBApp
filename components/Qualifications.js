@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import React from 'react'
 
 const Qualifications = ({ title, points }) => {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: 'grey',
-    fontFamily: 'Roboto',
+    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
   },
   pointsContainer: {
     marginVertical: 8,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   pointText: {
     fontSize: 18,
     color: 'grey',
-    fontFamily: 'Roboto',
+    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
     marginLeft: 5,
   },
 })

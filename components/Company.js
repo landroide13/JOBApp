@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Platform } from 'react-native'
 import React from 'react'
 
 const Company = ({ companyLogo, jobTitle, companyName, location }) => {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
       companyName: {
         fontSize: 18,
         color: 'grey',
-        fontFamily: 'Roboto',
+        fontFamily: Platform.OS === 'android'? 'Roboto' : null,
       },
       locationBox: {
         flexDirection: "row",
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
       locationName: {
         fontSize: 16,
         color: 'grey',
-        fontFamily: 'Roboto',
+        fontFamily: Platform.OS === 'android'? 'Roboto' : null,
         marginLeft: 2,
       },
 

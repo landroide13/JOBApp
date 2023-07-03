@@ -2,6 +2,10 @@ import { StyleSheet, Text,
         TouchableOpacity, View, 
         Image, TextInput, FlatList, 
         ActivityIndicator, StatusBar } from 'react-native'
+
+import Ionicons from '@expo/vector-icons/Ionicons'
+import { FontAwesome } from '@expo/vector-icons'; 
+
 import { useState, useEffect } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
@@ -62,7 +66,7 @@ const HomeScreen = () => {
                 <Image style={styles.userImg} source={require('../assets/profile.jpg')} />
                 <Text style={styles.user}>Hello: { auth.currentUser?.email }</Text>
                 <TouchableOpacity style={styles.buttonHeader} onPress={()=> navigation.navigate('History')}>
-                    <Image style={styles.userImgSearch} source={require('../assets/share.png')} />
+                    <FontAwesome name="history" size={24} color="white" />
                 </TouchableOpacity>
             </View>
 

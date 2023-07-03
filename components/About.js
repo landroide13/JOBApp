@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import React from 'react'
 
 const About = ({ info }) => {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   headText: {
     fontSize: 22,
     color: 'grey',
-    fontFamily: 'Roboto',
+    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
   },
   contentBox: {
     marginVertical: 4,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   contextText: {
     fontSize: 18,
     color: 'grey',
-    fontFamily: 'Roboto',
+    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
     marginVertical: 15,
   },
 })

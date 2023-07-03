@@ -56,7 +56,6 @@ const JobScreen = ({ route }) => {
     }
   };
 
-
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}
@@ -79,9 +78,9 @@ const JobScreen = ({ route }) => {
 
         { displayTabContent() }
 
-      </ScrollView>
+      </ScrollView>  
 
-      <Footer  url={items?.job_apply_link ?? 'https://careers.google.com/jobs/results/'} />
+      <Footer data={items}  url={items?.job_apply_link ?? 'https://careers.google.com/jobs/results/'} />
     </>
   )
 }

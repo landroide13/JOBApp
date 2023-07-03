@@ -2,7 +2,7 @@ import { StyleSheet, Text,
         TouchableOpacity, View, 
         Image, TextInput, FlatList, 
         ActivityIndicator, StatusBar } from 'react-native'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native'
@@ -10,7 +10,23 @@ import JobCard from '../components/JobCard'
 import JobNearCard from '../components/JobNearCard'
 import useFetch from '../hook/useFetch'
 
+import { DatabaseConnection } from '../connection/connection'
+
+const db = DatabaseConnection.getConnection();
+
 const HomeScreen = () => {
+
+    useEffect(()=>{
+        db.transaction(function(tx){
+            tx.executeSql(
+                'CREATE TABLE IF NOT EXISTS Jobs(job_id INTEGER PRIMARY KEY AUTOINCREMENT, employer_logo VARCHAR(20), job_title VARCHAR(200), employer_name VARCHAR(200), job_country VARCHAR(200) ) ',
+                [],
+                (tx, results)=>{
+                    console.log('Table created successfully')
+                }
+            )
+        })
+    }, [])
 
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -24,11 +40,11 @@ const HomeScreen = () => {
         console.log(items)
         navigation.navigate('JobDetail', { items });
         setSelectedJob(items._id);
-      };
+    };
 
-    const handleClick= () => {
-        navigation.navigate('JobSearchScreen');
-    }  
+    // const handleClick= () => {
+    //     navigation.navigate('JobSearchScreen');
+    // }  
 
     // const handleSignout = () =>{
     //     auth
@@ -87,7 +103,7 @@ const HomeScreen = () => {
                     <FlatList
                         data={data}
                         renderItem={({ item } ) => (
-                            <JobCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress}  />
+                            <JobCard item={ item } selectedJob={selectedJob} handleCardPress={handleCardPress} />
                         )}
                         keyExtractor={(item) => item._id }
                         horizontal

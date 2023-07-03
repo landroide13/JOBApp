@@ -41,36 +41,36 @@ const RegisterScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.avoid} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-    <SafeAreaView style={styles.container}>
-        <View style={styles.card}>
-            <View style={styles.inputContainer}>
-                <Text style={styles.title}>Register</Text>
-                <TextInput 
-                    placeholder='Email'
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
-                <TextInput 
-                    placeholder='Password'
-                    value={password}
-                    onChangeText={text => setPasword(text)}
-                    style={styles.input}
-                    secureTextEntry
-                />
+        <SafeAreaView style={styles.container}>
+            <View style={styles.card}>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.title}>Register</Text>
+                    <TextInput 
+                        placeholder='Email'
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        style={styles.input}
+                    />
+                    <TextInput 
+                        placeholder='Password'
+                        value={password}
+                        onChangeText={text => setPasword(text)}
+                        style={styles.input}
+                        secureTextEntry
+                    />
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={handleSignUp} style={[styles.button]}>
+                        <Text style={styles.buttonText}>Register</Text>
+                    </TouchableOpacity>
+                    <Text>Alrady have an Account?</Text>
+                    <TouchableOpacity onPress={() => navigation.replace('Login')} style={[styles.button, styles.buttonOutLine]}>
+                        <Text style={styles.buttonOutlineText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handleSignUp} style={[styles.button]}>
-                    <Text style={styles.buttonText}>Register</Text>
-                </TouchableOpacity>
-                <Text>Alrady have an Account?</Text>
-                <TouchableOpacity onPress={() => navigation.replace('Login')} style={[styles.button, styles.buttonOutLine]}>
-                    <Text style={styles.buttonOutlineText}>Login</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    </SafeAreaView>
-</KeyboardAvoidingView>
+        </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 

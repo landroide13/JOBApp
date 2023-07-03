@@ -1,24 +1,50 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Linking } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Linking, Alert } from 'react-native'
+import { useState } from 'react'
 
-const Footer = ({ url }) => {
+import { useNavigation } from '@react-navigation/native'
+
+import { DatabaseConnection } from '../connection/connection'
+
+const db = DatabaseConnection.getConnection()
+
+const Footer = ({ url, data }) => {
+
+  const navigation = useNavigation()
+
+  const addJob = ()=>{
+    console.log('Clicked..');
+    db.transaction(tx => {
+        tx.executeSql(
+            'INSERT INTO Jobs(employer_logo, job_title, employer_name, job_country)VALUES(?, ?, ?, ?)',
+            [data.employer_logo, data.job_title, data.employer_name, data.job_country],
+            (tx, results) => {
+              console.log('Job Added')
+              Alert.alert('Job Saved..', data.job_title, [
+                {text: 'OK', onPress: () => console.log('OK Pressed')}
+            ])
+              navigation.navigate('Home')
+            }
+        )
+    })
+}
+
   return (
     <View style={styles.container}>
-    <TouchableOpacity style={styles.likeBtn}>
-      <Image
-        source={require('../assets/heart.png')}
-        resizeMode='contain'
-        style={styles.likeBtnImage}
-      />
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.likeBtn} onPress={addJob}>
+        <Image
+          source={require('../assets/heart.png')}
+          resizeMode='contain'
+          style={styles.likeBtnImage}
+        />
+      </TouchableOpacity>
 
-    <TouchableOpacity
-      style={styles.applyBtn}
-      onPress={() => Linking.openURL(url)}      
-    >
-      <Text style={styles.applyBtnText}>Apply for job</Text>
-    </TouchableOpacity>
-  </View>
+      <TouchableOpacity
+        style={styles.applyBtn}
+        onPress={() => Linking.openURL(url)}      
+      >
+        <Text style={styles.applyBtnText}>Apply for job</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
 

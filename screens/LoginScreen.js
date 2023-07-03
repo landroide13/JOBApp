@@ -62,11 +62,9 @@ const LoginScreen = () => {
                         <TouchableOpacity onPress={handleLogin} style={styles.button}>
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.replace('Register')}>
-                            <Text style={styles.buttonOutlineText}>
-                                Don't have and Account?
-                                <Text style={styles.registerText}>Register</Text>
-                            </Text>
+                        <Text>Don't Have an Account?</Text>
+                        <TouchableOpacity onPress={() => navigation.replace('Register')} style={[styles.button, styles.buttonOutLine]}>
+                            <Text style={styles.buttonOutlineText}>Register</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

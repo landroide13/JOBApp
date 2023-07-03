@@ -1,4 +1,5 @@
 import { useEffect, useState} from 'react';
+import { Platform } from 'react-native';
 import axios from 'axios';
 
 const useFetch = (endpoint, query) => {
@@ -16,10 +17,15 @@ const useFetch = (endpoint, query) => {
     //       'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
     //     }
     //   };
+
+    var baseURL = null;
+
+    Platform.OS === 'android'? baseURL = 'http://10.0.2.2:3000/api/jobs' : baseURL= 'http://localhost:3000/api/jobs'
     
     const options = {
         method: 'GET',
-        url: `http://10.0.2.2:3000/api/jobs`
+        // url: `http://10.0.2.2:3000/api/jobs`
+        url: baseURL
     }
 
     const fetchData = async () =>{

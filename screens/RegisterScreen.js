@@ -44,7 +44,7 @@ const RegisterScreen = () => {
     <SafeAreaView style={styles.container}>
         <View style={styles.card}>
             <View style={styles.inputContainer}>
-                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.title}>Register</Text>
                 <TextInput 
                     placeholder='Email'
                     value={email}
@@ -61,7 +61,11 @@ const RegisterScreen = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={handleSignUp} style={[styles.button]}>
-                    <Text style={styles.buttonOutlineText}>Register</Text>
+                    <Text style={styles.buttonText}>Register</Text>
+                </TouchableOpacity>
+                <Text>Alrady have an Account?</Text>
+                <TouchableOpacity onPress={() => navigation.replace('Login')} style={[styles.button, styles.buttonOutLine]}>
+                    <Text style={styles.buttonOutlineText}>Login</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -125,15 +129,15 @@ const styles = StyleSheet.create({
         fontWeight: 700,
         fontSize: 16
     },
-    // buttonOutLine:{
-    //     backgroundColor: '#F37A09',
-    //     marginTop: 5,
-    //     borderColor: '#0782f9',
-    //     borderWidth: 2
-    // },
+    buttonOutLine:{
+        backgroundColor: 'white',
+        marginTop: 5,
+        borderColor: '#0782f9',
+        borderWidth: 2
+    },
     buttonOutlineText:{
-        color: 'white',
+        color: '#0782f9',
         fontWeight: 700,
         fontSize: 16
-    }
+    },
 })

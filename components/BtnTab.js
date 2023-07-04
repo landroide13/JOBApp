@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
 import React from 'react'
 
 const BtnTab = ({ name, activeTab, onHandleSearchType }) => {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     shadowColor: '#efefef',
   }),
   btnText: (name, activeTab) => ({
-    fontFamily: 'Roboto',
+    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
     fontSize: 16,
     color: name === activeTab ? "#C3BFCC" : "#AAA9B8",
     fontWeight: 700

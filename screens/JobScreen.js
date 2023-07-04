@@ -26,7 +26,7 @@ const JobScreen = ({ route }) => {
     setRefreshing(true);
     refetch()
     setRefreshing(false)
-  }, []);
+  }, []); 
 
   const displayTabContent = () => {
     switch (activeTab) {

@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Alert, Platform } from 'react-native'
 import { useState, useEffect } from 'react'
+import * as Font from 'expo-font';
 
 import { DatabaseConnection } from '../connection/connection'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   },
 
   card:{
-    width: '95%',
+    width: Platform.OS === 'android' ? '95%' : '90%' ,
     flexDirection: 'row',
     padding: 11,
     alignItems: 'center',
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
 
   text:{
     flexDirection: 'column',
-    width: '68%',
+    width: Platform.OS === 'android' ? '68%' : '58%' ,
     padding: 15,
   },
 

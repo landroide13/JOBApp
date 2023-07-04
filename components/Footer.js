@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, Linking, Alert, Platform } from 'react-native'
 import { useState } from 'react'
 
+import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native'
 
 import { DatabaseConnection } from '../connection/connection'

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: 'grey',
-    fontFamily: Platform.OS === 'android'? 'Roboto' : null,
+    //fontFamily: Platform.OS === 'android'? 'Roboto' : null,
   },
   pointsContainer: {
     marginVertical: 8,
